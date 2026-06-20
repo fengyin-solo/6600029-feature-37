@@ -103,9 +103,14 @@ export const useDroneStore = defineStore('drone', () => {
     terrainData.value = mockTerrainData;
   }
 
-  function exportPlan(): string {
+  function exportPlan(name?: string, description?: string): string {
     if (!currentPlan.value) return '';
-    return exportKML(currentPlan.value);
+    const plan = {
+      ...currentPlan.value,
+      name: name || currentPlan.value.name,
+      description: description !== undefined ? description : currentPlan.value.description,
+    };
+    return exportKML(plan);
   }
 
   // ─── Computed ─────────────────────────────────────────────────────────────

@@ -160,10 +160,17 @@ public class RouteService {
     }
 
     public String exportKML(List<Waypoint> waypoints, String name) {
+        return exportKML(waypoints, name, null);
+    }
+
+    public String exportKML(List<Waypoint> waypoints, String name, String description) {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         sb.append("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n  <Document>\n");
         sb.append("    <name>").append(name).append("</name>\n");
+        if (description != null && !description.isEmpty()) {
+            sb.append("    <description><![CDATA[").append(description).append("]]></description>\n");
+        }
         sb.append("    <Placemark>\n      <name>Flight Route</name>\n");
         sb.append("      <LineString>\n        <altitudeMode>absolute</altitudeMode>\n");
         sb.append("        <coordinates>\n");

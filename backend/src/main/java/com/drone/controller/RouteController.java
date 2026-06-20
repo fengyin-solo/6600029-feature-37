@@ -44,6 +44,7 @@ public class RouteController {
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> wpData = (List<Map<String, Object>>) request.get("waypoints");
         String name = (String) request.getOrDefault("name", "Flight Plan");
+        String description = (String) request.get("description");
 
         List<Waypoint> waypoints = new java.util.ArrayList<>();
         for (Map<String, Object> w : wpData) {
@@ -57,7 +58,7 @@ public class RouteController {
             ));
         }
 
-        String kml = routeService.exportKML(waypoints, name);
+        String kml = routeService.exportKML(waypoints, name, description);
         return Map.of("kml", kml);
     }
 }

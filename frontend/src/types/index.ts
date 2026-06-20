@@ -10,6 +10,7 @@ export interface Waypoint {
 export interface FlightPlan {
   id: string;
   name: string;
+  description?: string;
   waypoints: Waypoint[];
   totalDistance: number;
   estimatedTime: number;
